@@ -34,15 +34,16 @@ router.post("/", async (req, res) => {
 
 //update route
 router.put("/:id", async (req, res) => {
-    console.log("in put route... ", req.body)
-
     const newData = req.body
+
+    console.log("in put route... ", newData)
+    console.log("in put ID... ", req.params.id)
 
     const onmyoji = await Onmyoji.findByIdAndUpdate(
         req.params.id,
         { $push: {shikigamis: newData}, new: true}
     )
-    res.json(onmyoji)
+    res.json({status: 200, data: onmyoji})
 
   });
 
