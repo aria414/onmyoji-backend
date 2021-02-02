@@ -5,6 +5,7 @@ const mongoose = require('../db/connection')
 
 // IMPORT THE MODELs COOKBOOK AND AUTHOR
 const Onmyoji = require('../models/onmyojimd')
+const Shikigami = require('../models/shikigamimd')
 
 // CONNECT TO THE DB
 const db = mongoose.connection
