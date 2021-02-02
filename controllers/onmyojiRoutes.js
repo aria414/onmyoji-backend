@@ -32,4 +32,13 @@ router.post("/", async (req, res) => {
 
 });
 
+//update route
+router.put("/:id", async (req, res) => {
+    console.log("in put route... ", req.body)
+    res.json(
+        await Dog.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    );
+
+  });
+
 module.exports = router
