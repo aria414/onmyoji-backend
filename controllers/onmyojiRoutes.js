@@ -33,13 +33,10 @@ router.post("/", async (req, res) => {
 
 });
 
-//update route
-router.put("/:id", async (req, res) => {
+//Update route ... To update the Onmyoji with new Shikigami
+router.put("/addShiki/:id", async (req, res) => {
     const newData = await Shikigami.create(req.body)
      
-    console.log("in put route... ", newData)
-    console.log("in put ID... ", req.params.id)
-
     const onmyoji = await Onmyoji.findByIdAndUpdate(
         req.params.id,
         { 
@@ -50,5 +47,10 @@ router.put("/:id", async (req, res) => {
     res.json(onmyoji)
 
   });
+
+  //update route
+router.put("/:id", async (req, res) => {
+    res.json(await Onmyoji.findByIdAndUpdate(req.params.id, req.body, { new: true }));
+});
 
 module.exports = router
