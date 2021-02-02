@@ -4,27 +4,32 @@ const router = express.Router()
 const mongoose = require('../db/connection')
 
 // IMPORT THE MODELs COOKBOOK AND AUTHOR
-// const Shiki = require('../models/Shiki')
-// const Onmyoji = require('../models/Onmyoji')
+const Onmyoji = require('../models/onmyojimd')
 
 // CONNECT TO THE DB
 const db = mongoose.connection
 
+// ==========  DISPLAYS ALL ONMYOJI =========
 router.get('/', (req, res) => {
     //....Use the model/collection we imported and display its documents
-    // Onmyoji.find({}).then(allOnmyojis => {
-    //     res.json({
-    //         status: 200,
-    //         onmyojis: allOnmyojis
-    //     })
-    // }).catch(err => res.json({
-    //     status: 400,
-    //     err: err
-    // }))
-    res.json({
-        status: 200,
-        msg: "In Onmyoji Route"
-    })
+    Onmyoji.find({}).populate("shikigamis").then(allOnmyojis => {
+        res.json({
+            status: 200,
+            onmyojis: allOnmyojis
+        })
+    }).catch(err => res.json({
+        status: 400,
+        err: err
+    }))
 })
+
+// Write the route to create an Onmyoji
+router.post("/", async (req, res) => {
+    console.log("Creating onmyoji: ", req.body)
+    res.json(
+        await Onmyoji.create(req.body)
+    );
+
+});
 
 module.exports = router

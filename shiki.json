@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Onikiri",
+        "grade": 5,
+        "rarity": "SSR",
+        "onmyoji": "Yorimitsu"
+    },
+    {
+        "name": "Yoto Hime",
+        "grade": 4,
+        "rarity": "SSR",
+        "onmyoji": "Yorimitsu"
+    },
+    {
+        "name": "Blazing Tama",
+        "grade": 5,
+        "rarity": "SP",
+        "onmyoji": "Semei"
+    }
+]

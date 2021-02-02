@@ -32,5 +32,5 @@ app.use('/shiki/', shikiRouter)
 const onmyojiRouter = require('./controllers/onmyojiRoutes.js')
 app.use('/onmyoji/', onmyojiRouter)
 
-
+//The PORT is a variable that Heroku is tryna pass in. Use this variable to set up server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
