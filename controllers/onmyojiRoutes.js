@@ -34,11 +34,7 @@ router.post("/", async (req, res) => {
 
 //update route
 router.put("/:id", async (req, res) => {
-    const newData = {
-        "name": "Hakusozu",
-        "grade": 4,
-        "rarity": "SSR"
-    }
+    const newData = "6019d2279eb53f1439e16c88"
      
     console.log("in put route... ", newData)
     console.log("in put ID... ", req.params.id)
