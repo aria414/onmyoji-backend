@@ -48,9 +48,15 @@ router.put("/addShiki/:id", async (req, res) => {
 
   });
 
-  //update route
+  // Update route ...  route for general Onmyoji info
 router.put("/:id", async (req, res) => {
     res.json(await Onmyoji.findByIdAndUpdate(req.params.id, req.body, { new: true }));
 });
+
+// Delete route ...
+router.delete("/:id", async (req, res) => {
+    res.json(await Onmyoji.findByIdAndRemove(req.params.id));
+  });
+
 
 module.exports = router
