@@ -33,4 +33,4 @@ const onmyojiRouter = require('./controllers/onmyojiRoutes.js')
 app.use('/onmyoji/', onmyojiRouter)
 
 
-app.listen(4000, () => console.log('Server running on port 4000!'))
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
