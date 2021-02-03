@@ -23,6 +23,12 @@ router.get('/', (req, res) => {
     }))
 })
 
+// ========== DISPLAY 1 ONMYOJI ========
+router.get("/:id", async (req, res) => {
+    res.json(await Onmyoji.findById(req.params.id));
+});
+
+
 // ==========  CREATE 1 ONMYOJI =========
 router.post("/", async (req, res) => {
     console.log("Creating onmyoji: ", req.body)
