@@ -13,8 +13,6 @@ const DB = mongoose.connection;
 
 mongoose.connect(MONGODBURI, config);
 
-console.log("database url: ", MONGODBURI)
-
 DB.on("open", () => console.log("You are connected to Mongo"))
   .on("close", () => console.log("You are disconnected to Mongo"))
   .on("error", (err) => console.log(err));
