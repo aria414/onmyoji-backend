@@ -4,7 +4,7 @@ const router = express.Router()
 const mongoose = require('../db/connection')
 
 // IMPORT THE MODELs COOKBOOK AND AUTHOR
-const Shiki = require('../models/shikigamimd')
+const Shikigami = require('../models/shikigamimd')
 
 // CONNECT TO THE DB
 const db = mongoose.connection
@@ -12,7 +12,7 @@ const db = mongoose.connection
 
 // ==========  DISPLAYS ALL ONMYOJI =========
 router.get('/', (req, res) => {
-    Shiki.find({}).then(allShikis => {
+    Shikigami.find({}).then(allShikis => {
         res.json(allShikis)
     }).catch(err => res.json({
         status: 400,
@@ -37,5 +37,5 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     res.json(await Shikigami.findByIdAndRemove(req.params.id));
   });
-  
+
 module.exports = router
