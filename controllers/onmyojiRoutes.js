@@ -30,6 +30,7 @@ router.get("/:id", async (req, res) => {
 
 
 // ==========  CREATE 1 ONMYOJI =========
+// shiki:  6019d2289eb53f1439e16c89
 router.post("/", async (req, res) => {
     console.log("Creating onmyoji: ", req.body)
     res.json(
@@ -39,19 +40,20 @@ router.post("/", async (req, res) => {
 });
 
 // ==========  UPDATE ONMYOJI BY ADDING 1 SHIKI =========
-router.put("/addShiki/:id", async (req, res) => {
+router.put("/addShiki/:onmyID", async (req, res) => {
     /*
-     Meed to grab the data from body and use it to create a new shiki
+     Need to grab the data from body and use it to create a new shiki.
      
      The Onmyoji Schema references Shikigami collection so have to 
-     push the new hikigami into the 'shikigamis' key.
+     push the new shikigami into the 'shikigamis' key with the data from body
 
-     Or you can add by sending in the Shiki's ID if it exist.
+     Or you can put the Shiki's ID in the body if shiki exist, and push that to the Onmyoji so onmyoji has a new shiki.
     */
     const newData = await Shikigami.create(req.body)
-     
-    const onmyoji = await Onmyoji.findByIdAndUpdate(
-        req.params.id,
+    console.log("Update Onmyo by adding shiki: ", newData)
+
+    const onmyoji = await Onmyoji.findByIdAndUpdate(   
+        req.params.onmyID,
         { 
             $push: {shikigamis: newData}, 
             new: true
