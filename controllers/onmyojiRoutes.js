@@ -3,7 +3,7 @@ const router = express.Router()
 // IMPORT mongoose
 const mongoose = require('../db/connection')
 
-// IMPORT THE MODELs COOKBOOK AND AUTHOR
+// IMPORT THE MODELs ONMYOJI AND SHIKIGAMI
 const Onmyoji = require('../models/onmyojimd')
 const Shikigami = require('../models/shikigamimd')
 
@@ -12,7 +12,6 @@ const db = mongoose.connection
 
 // ==========  DISPLAYS ALL ONMYOJI =========
 router.get('/', (req, res) => {
-    //....Use the model/collection we imported and display its documents
     Onmyoji.find({}).populate("shikigamis").then(allOnmyojis => {
         res.json({
             status: 200,
@@ -24,7 +23,7 @@ router.get('/', (req, res) => {
     }))
 })
 
-// Write the route to create an Onmyoji
+// ==========  CREATE 1 ONMYOJI =========
 router.post("/", async (req, res) => {
     console.log("Creating onmyoji: ", req.body)
     res.json(
@@ -33,8 +32,16 @@ router.post("/", async (req, res) => {
 
 });
 
-//Update route ... To update the Onmyoji with new Shikigami
+// ==========  UPDATE ONMYOJI BY ADDING 1 SHIKI =========
 router.put("/addShiki/:id", async (req, res) => {
+    /*
+     Meed to grab the data from body and use it to create a new shiki
+     
+     The Onmyoji Schema references Shikigami collection so have to 
+     push the new hikigami into the 'shikigamis' key.
+
+     Or you can add by sending in the Shiki's ID if it exist.
+    */
     const newData = await Shikigami.create(req.body)
      
     const onmyoji = await Onmyoji.findByIdAndUpdate(
@@ -48,12 +55,12 @@ router.put("/addShiki/:id", async (req, res) => {
 
   });
 
-  // Update route ...  route for general Onmyoji info
+// ==========  UPDATE ONMYOJI INFO - NAME, LEVEL, CLAN =========
 router.put("/:id", async (req, res) => {
     res.json(await Onmyoji.findByIdAndUpdate(req.params.id, req.body, { new: true }));
 });
 
-// Delete route ...
+// ==========  DELETE 1 ONMYOJI BY ID =========
 router.delete("/:id", async (req, res) => {
     res.json(await Onmyoji.findByIdAndRemove(req.params.id));
   });
